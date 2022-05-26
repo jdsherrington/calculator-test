@@ -5,6 +5,7 @@ calcText.textContent = '';
 let mainDisplay = '',
     subDisplay = '',
     calculation = '',
+    lastChar = '',
     result = '';
     numpad = new Object();
 document.querySelectorAll('.btn').forEach(function(numBtn) {
@@ -18,6 +19,8 @@ document.querySelectorAll('.btn').forEach(function(numBtn) {
                 if (mainDisplay == '') {
                     break;
                 };
+                calculation = calculation.substring(0, calculation.length - 1);
+                subDisplay = subDisplay.substring(0, subDisplay.length - 1);
                 mainDisplay = mainDisplay.substring(0, mainDisplay.length - 1);
                 console.log(mainDisplay);
                 displayText.textContent = mainDisplay;
