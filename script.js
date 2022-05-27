@@ -5,7 +5,7 @@ calcText.textContent = '';
 let mainDisplay = '',
     subDisplay = '',
     calculation = '',
-    lastChar = '',
+    tempCalc = '',
     result = '';
     numpad = new Object();
 document.querySelectorAll('.btn').forEach(function(numBtn) {
@@ -22,7 +22,6 @@ document.querySelectorAll('.btn').forEach(function(numBtn) {
                 calculation = calculation.substring(0, calculation.length - 1);
                 subDisplay = subDisplay.substring(0, subDisplay.length - 1);
                 mainDisplay = mainDisplay.substring(0, mainDisplay.length - 1);
-                console.log(mainDisplay);
                 displayText.textContent = mainDisplay;
                 break;
 
@@ -30,46 +29,54 @@ document.querySelectorAll('.btn').forEach(function(numBtn) {
                 mainDisplay = '';
                 subDisplay = '';
                 calculation = '';
-                console.log(mainDisplay);
                 calcText.textContent = subDisplay;
                 displayText.textContent = mainDisplay;
                 break;    
             
             case "add":
+                tempCalc = '';
                 calculate();
                 subDisplay += ` ${numpad[e.target.id].value} `;
+                tempCalc += `+`;
                 calculation += `+`;
-                console.log(calculation);
+                console.log(tempCalc);
                 calcText.textContent = subDisplay;
                 displayText.textContent = mainDisplay;
                 mainDisplay = '';
                 break;
                     
             case "subtract":
+                tempCalc = '';
                 calculate();
                 subDisplay += ` ${numpad[e.target.id].value} `;
+                tempCalc += `-`;
                 calculation += `-`;
-                console.log(calculation);
+                console.log(tempCalc);
                 calcText.textContent = subDisplay;
                 displayText.textContent = mainDisplay;
                 mainDisplay = '';
                 break;
 
             case "multiply":
+                tempCalc = '';
                 calculate();
+                console.log(tempCalc);
                 subDisplay += ` ${numpad[e.target.id].value} `;
+                tempCalc += `*`;
                 calculation += `*`;
-                console.log(calculation);
+                console.log(tempCalc);
                 calcText.textContent = subDisplay;
                 displayText.textContent = mainDisplay;
                 mainDisplay = '';
                 break;
 
             case "divide":
+                tempCalc = '';
                 calculate();
                 subDisplay += ` ${numpad[e.target.id].value} `;
+                tempCalc += `/`; 
                 calculation += `/`;
-                console.log(calculation);
+                console.log(tempCalc);
                 calcText.textContent = subDisplay;
                 displayText.textContent = mainDisplay;
                 mainDisplay = '';
@@ -86,12 +93,17 @@ document.querySelectorAll('.btn').forEach(function(numBtn) {
                     mainDisplay += '0';
                     subDisplay += '0';
                     calculation += '0';
-                    console.log(mainDisplay);
                 };
+                let regex = /\./i;
+                console.log(regex.test(mainDisplay));
+                if (regex.test(mainDisplay)) {
+                    break;
+                };
+                tempCalc += numpad[e.target.id].value;
+                console.log(tempCalc);
                 mainDisplay += numpad[e.target.id].value;
                 subDisplay += numpad[e.target.id].value;
                 calculation += numpad[e.target.id].value;
-                console.log(mainDisplay);
                 displayText.textContent = mainDisplay;
                 break;
 
@@ -99,10 +111,12 @@ document.querySelectorAll('.btn').forEach(function(numBtn) {
                 if (mainDisplay == '0') {
                     mainDisplay = '';
                 };
+                tempCalc += numpad[e.target.id].value;
                 mainDisplay += numpad[e.target.id].value
                 subDisplay += numpad[e.target.id].value;
                 calculation += numpad[e.target.id].value
-                console.log(mainDisplay);
+
+                console.log(tempCalc);
                 displayText.textContent = mainDisplay;
         };
     });
